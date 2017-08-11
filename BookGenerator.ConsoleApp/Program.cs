@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
-using BookGenerator.ConsoleApp.Domain.Level;
-using BookGenerator.ConsoleApp.Generator;
-using BookGenerator.ConsoleApp.Helpers;
+using LevelGenerator.ConsoleApp.Common;
+using LevelGenerator.ConsoleApp.Domain.Level;
 
-namespace BookGenerator.ConsoleApp
+namespace LevelGenerator.ConsoleApp
 {
     static class Program
     {
-        private static readonly WorldGenerator Generator = new WorldGenerator();
+        private static readonly Generator.LevelGenerator Generator = new Generator.LevelGenerator();
         static void Main()
         {
             while (true)

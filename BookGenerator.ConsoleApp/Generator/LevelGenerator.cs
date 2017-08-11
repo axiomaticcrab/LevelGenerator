@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Threading;
-using BookGenerator.ConsoleApp.Domain.Enemy;
-using BookGenerator.ConsoleApp.Domain.Level;
-using BookGenerator.ConsoleApp.Helpers;
+using LevelGenerator.ConsoleApp.Common;
+using LevelGenerator.ConsoleApp.Domain.Enemy;
+using LevelGenerator.ConsoleApp.Domain.Level;
 
-namespace BookGenerator.ConsoleApp.Generator
+namespace LevelGenerator.ConsoleApp.Generator
 {
-    public class WorldGenerator
+    public class LevelGenerator
     {
         private int Width { get; set; }
         private int Height { get; set; }
 
-        private double _emptyTileTreshold;
-        private double _obstacleEmenyTreshold;
-
         private readonly List<Type> _obstacleEnemies = new List<Type>
         {
-            Type.GetType("BookGenerator.ConsoleApp.Domain.Enemy.Instances.PatternObstacleEnemy"),
-            Type.GetType("BookGenerator.ConsoleApp.Domain.Enemy.Instances.TextObstacleEnemy"),
+            Type.GetType("LevelGenerator.ConsoleApp.Domain.Enemy.Types.PatternObstacleEnemy"),
+            Type.GetType("LevelGenerator.ConsoleApp.Domain.Enemy.Types.TextObstacleEnemy"),
         };
 
-        public WorldGenerator Init(int width, int height)
+        public LevelGenerator Init(int width, int height)
         {
             Width = width;
             Height = height;
@@ -31,9 +27,7 @@ namespace BookGenerator.ConsoleApp.Generator
 
         public World Build()
         {
-            _emptyTileTreshold = ConfigurationManager.AppSettings["emptyTileTreshold"].ToDouble();
-            _obstacleEmenyTreshold = ConfigurationManager.AppSettings["obstacleEnemyTreshold"].ToDouble();
-
+            var enemySpawnRates = new EnemySpawnRateContainer().Init();
             var tileList = new List<Tile>();
             var width = Width / 2;
             var height = Height / 2;
@@ -47,24 +41,30 @@ namespace BookGenerator.ConsoleApp.Generator
                         Position = new Vector2(x, y)
                     };
 
-                    if (_emptyTileTreshold < GenerateRandom())
+                    var random = GenerateRandom();
+
+                    if (enemySpawnRates.NoSpawnRange.HasValue(random)==false)
                     {
-                        //not empty
-                        if (_obstacleEmenyTreshold < GenerateRandom())
+                        if (enemySpawnRates.ObstacleSpanwRange.HasValue(random))
                         {
-                            tile.Enemy = (IEnemy) _obstacleEnemies.CreateRandomInstance(new Vector2(x, y), 0.5f);
+                            tile.Enemy=SpawnRandomObstacle(new Vector2(x, y), 0.5f);
                         }
                     }
 
                     tileList.Add(tile);
-                    Thread.Sleep(10);
                 }
             }
             return new World(Width, Height, tileList);
         }
 
+        private IEnemy SpawnRandomObstacle(Vector2 position,double movementSpeedWhenWalkedOn)
+        {
+            return (IEnemy)_obstacleEnemies.CreateRandomInstance(position,movementSpeedWhenWalkedOn);
+        }
+
         private double GenerateRandom()
         {
+            Thread.Sleep(10);
             Random random = new Random();
             return random.NextDouble();
         }

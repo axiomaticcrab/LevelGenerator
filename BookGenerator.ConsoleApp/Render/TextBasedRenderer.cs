@@ -1,4 +1,4 @@
-﻿namespace BookGenerator.ConsoleApp.Render
+﻿namespace LevelGenerator.ConsoleApp.Render
 {
     public class TextBasedRenderer : IRenderer
     {

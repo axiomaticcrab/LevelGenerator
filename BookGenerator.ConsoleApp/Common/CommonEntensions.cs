@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace BookGenerator.ConsoleApp.Helpers
+namespace LevelGenerator.ConsoleApp.Common
 {
     public static class CommonEntensions
     {

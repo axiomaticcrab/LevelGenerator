@@ -1,4 +1,4 @@
-﻿namespace BookGenerator.ConsoleApp.Domain.Enemy.Behaviours
+﻿namespace LevelGenerator.ConsoleApp.Domain.Enemy.Behaviours
 {
     public interface ISlowPlayer
     {

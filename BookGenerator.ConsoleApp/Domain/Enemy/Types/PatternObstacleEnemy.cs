@@ -1,15 +1,15 @@
-﻿using BookGenerator.ConsoleApp.Domain.Enemy.Behaviours;
-using BookGenerator.ConsoleApp.Domain.Level;
-using BookGenerator.ConsoleApp.Render;
+﻿using LevelGenerator.ConsoleApp.Domain.Enemy.Behaviours;
+using LevelGenerator.ConsoleApp.Domain.Level;
+using LevelGenerator.ConsoleApp.Render;
 
-namespace BookGenerator.ConsoleApp.Domain.Enemy.Instances
+namespace LevelGenerator.ConsoleApp.Domain.Enemy.Types
 {
     public class PatternObstacleEnemy : Enemy, ISlowPlayer
     {
-        private readonly float _movementSpeedWhenWalkedOn;
+        private readonly double _movementSpeedWhenWalkedOn;
         static readonly IRenderer renderer = new TextBasedRenderer("P");
 
-        public PatternObstacleEnemy(Vector2 position, float movementSpeedWhenWalkedOn) : base(renderer,"Pattern Obstacle Enemy", position)
+        public PatternObstacleEnemy(Vector2 position, double movementSpeedWhenWalkedOn) : base(renderer,"Pattern Obstacle Enemy", position)
         {
             _movementSpeedWhenWalkedOn = movementSpeedWhenWalkedOn;
         }

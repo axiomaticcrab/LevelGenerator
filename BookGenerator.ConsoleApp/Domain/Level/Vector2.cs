@@ -1,4 +1,4 @@
-﻿namespace BookGenerator.ConsoleApp.Domain.Level
+﻿namespace LevelGenerator.ConsoleApp.Domain.Level
 {
     public class Vector2
     {

@@ -1,6 +1,6 @@
-﻿using BookGenerator.ConsoleApp.Domain.Enemy;
+﻿using LevelGenerator.ConsoleApp.Domain.Enemy;
 
-namespace BookGenerator.ConsoleApp.Domain.Level
+namespace LevelGenerator.ConsoleApp.Domain.Level
 {
     public class Tile
     {

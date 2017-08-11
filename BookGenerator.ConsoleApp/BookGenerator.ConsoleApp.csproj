@@ -7,8 +7,8 @@
     <ProjectGuid>{70B1D89B-A3A6-4CA7-85E2-44A8C0DEEFEF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BookGenerator.ConsoleApp</RootNamespace>
-    <AssemblyName>BookGenerator.ConsoleApp</AssemblyName>
+    <RootNamespace>LevelGenerator.ConsoleApp</RootNamespace>
+    <AssemblyName>LevelGenerator.ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,8 +54,10 @@
     <Compile Include="Domain\Level\Tile.cs" />
     <Compile Include="Domain\Level\World.cs" />
     <Compile Include="Domain\Enemy\Enemy.cs" />
-    <Compile Include="Generator\WorldGenerator.cs" />
-    <Compile Include="Helpers\CommonEntensions.cs" />
+    <Compile Include="Common\DoubleRange.cs" />
+    <Compile Include="Generator\EnemySpawnRateContainer.cs" />
+    <Compile Include="Generator\LevelGenerator.cs" />
+    <Compile Include="Common\CommonEntensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Level\Vector2.cs" />

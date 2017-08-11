@@ -1,7 +1,7 @@
-﻿using BookGenerator.ConsoleApp.Domain.Level;
-using BookGenerator.ConsoleApp.Render;
+﻿using LevelGenerator.ConsoleApp.Domain.Level;
+using LevelGenerator.ConsoleApp.Render;
 
-namespace BookGenerator.ConsoleApp.Domain.Enemy
+namespace LevelGenerator.ConsoleApp.Domain.Enemy
 {
     public abstract class Enemy : IEnemy
     {

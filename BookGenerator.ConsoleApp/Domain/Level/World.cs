@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BookGenerator.ConsoleApp.Domain.Level
+namespace LevelGenerator.ConsoleApp.Domain.Level
 {
     public class World
     {
