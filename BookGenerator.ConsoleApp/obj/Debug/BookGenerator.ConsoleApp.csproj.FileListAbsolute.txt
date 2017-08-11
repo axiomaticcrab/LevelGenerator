@@ -1,0 +1,5 @@
+C:\Users\hp\Documents\GitHub\BookGenerator\BookGenerator\BookGenerator.ConsoleApp\bin\Debug\BookGenerator.ConsoleApp.exe.config
+C:\Users\hp\Documents\GitHub\BookGenerator\BookGenerator\BookGenerator.ConsoleApp\bin\Debug\BookGenerator.ConsoleApp.exe
+C:\Users\hp\Documents\GitHub\BookGenerator\BookGenerator\BookGenerator.ConsoleApp\bin\Debug\BookGenerator.ConsoleApp.pdb
+C:\Users\hp\Documents\GitHub\BookGenerator\BookGenerator\BookGenerator.ConsoleApp\obj\Debug\BookGenerator.ConsoleApp.exe
+C:\Users\hp\Documents\GitHub\BookGenerator\BookGenerator\BookGenerator.ConsoleApp\obj\Debug\BookGenerator.ConsoleApp.pdb
