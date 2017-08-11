@@ -1,27 +1,35 @@
+using System.Collections.Generic;
 using System.Configuration;
 using LevelGenerator.ConsoleApp.Common;
+using LevelGenerator.ConsoleApp.Enemy;
 
 namespace LevelGenerator.ConsoleApp.Generator
 {
     public class EnemySpawnRateContainer
     {
-        #region Keys
 
-        protected readonly string NoSpawnMinKey = "emptyTileMinSpawnRate";
-        protected readonly string NoSpawnMaxKey = "emptyTileMaxSpawnRate";
+        public List<KeyValuePair<EnemyType, DoubleRange>> EnemySpawnRates = new List<KeyValuePair<EnemyType, DoubleRange>>();
 
-        protected readonly string ObstacleMinSpawnKey = "obstacleMinEnemySpawnRate";
-        protected readonly string ObstacleMaxSpawnKey = "obstacleMaxEnemySpawnRate";
-
-        #endregion
+        private readonly List<KeyValuePair<EnemyType, string>> _enemySpawnRateKeys = new List<KeyValuePair<EnemyType, string>>
+        {
+            new KeyValuePair<EnemyType, string>(EnemyType.Obstacle, "obstacleEnemySpawnRate"),
+            new KeyValuePair<EnemyType, string>(EnemyType.None, "obstacleEnemySpawnRate")
+        };
 
         public DoubleRange NoSpawnRange { get; set; }
         public DoubleRange ObstacleSpanwRange { get; set; }
+        public DoubleRange RangerSpanwRange { get; set; }
 
         public EnemySpawnRateContainer Init()
         {
-            NoSpawnRange = new DoubleRange(GetKeyValueFromAppSettings(NoSpawnMinKey), GetKeyValueFromAppSettings(NoSpawnMaxKey));
-            ObstacleSpanwRange = new DoubleRange(GetKeyValueFromAppSettings(ObstacleMinSpawnKey), GetKeyValueFromAppSettings(ObstacleMaxSpawnKey));
+
+            foreach (var enemySpawnRateKey in _enemySpawnRateKeys)
+            {
+                var min = GetKeyValueFromAppSettings(enemySpawnRateKey.Value + "Min");
+                var max = GetKeyValueFromAppSettings(enemySpawnRateKey.Value + "Max");
+
+                EnemySpawnRates.Add(new KeyValuePair<EnemyType, DoubleRange>(enemySpawnRateKey.Key, new DoubleRange(min, max)));
+            }
             return this;
         }
 

@@ -1,4 +1,4 @@
-﻿namespace LevelGenerator.ConsoleApp.Domain.Enemy.Behaviours
+﻿namespace LevelGenerator.ConsoleApp.Enemy.Behaviours
 {
     public interface ICanRotate
     {

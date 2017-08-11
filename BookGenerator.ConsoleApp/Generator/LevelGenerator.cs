@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using LevelGenerator.ConsoleApp.Common;
-using LevelGenerator.ConsoleApp.Domain.Enemy;
-using LevelGenerator.ConsoleApp.Domain.Level;
+using LevelGenerator.ConsoleApp.Enemy;
+using LevelGenerator.ConsoleApp.Level;
+using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Generator
 {
@@ -12,14 +14,13 @@ namespace LevelGenerator.ConsoleApp.Generator
         private int Width { get; set; }
         private int Height { get; set; }
 
-        private readonly List<Type> _obstacleEnemies = new List<Type>
-        {
-            Type.GetType("LevelGenerator.ConsoleApp.Domain.Enemy.Types.PatternObstacleEnemy"),
-            Type.GetType("LevelGenerator.ConsoleApp.Domain.Enemy.Types.TextObstacleEnemy"),
-        };
+        private EnemySpawner enemySpawner;
+        private EnemySpawnRateContainer enemySpawnRateContainer;
+
 
         public LevelGenerator Init(int width, int height)
         {
+            enemySpawner = new EnemySpawner();
             Width = width;
             Height = height;
             return this;
@@ -27,7 +28,7 @@ namespace LevelGenerator.ConsoleApp.Generator
 
         public World Build()
         {
-            var enemySpawnRates = new EnemySpawnRateContainer().Init();
+            enemySpawnRateContainer = new EnemySpawnRateContainer().Init();
             var tileList = new List<Tile>();
             var width = Width / 2;
             var height = Height / 2;
@@ -41,33 +42,61 @@ namespace LevelGenerator.ConsoleApp.Generator
                         Position = new Vector2(x, y)
                     };
 
-                    var random = GenerateRandom();
+                    var random = CommonEntensions.GenerateRandom();
 
-                    if (enemySpawnRates.NoSpawnRange.HasValue(random)==false)
+                    var findEnemyTypeToSpawn = FindEnemyTypeToSpawn(random);
+
+                    switch (findEnemyTypeToSpawn)
                     {
-                        if (enemySpawnRates.ObstacleSpanwRange.HasValue(random))
-                        {
-                            tile.Enemy=SpawnRandomObstacle(new Vector2(x, y), 0.5f);
-                        }
+                            case EnemyType.Obstacle:
+                            tile.Enemy = enemySpawner.Spawn(findEnemyTypeToSpawn, new Vector2(x, y), 0.5f);
+                            break;
                     }
-
                     tileList.Add(tile);
                 }
             }
             return new World(Width, Height, tileList);
         }
 
-        private IEnemy SpawnRandomObstacle(Vector2 position,double movementSpeedWhenWalkedOn)
+        private EnemyType FindEnemyTypeToSpawn(double random)
         {
-            return (IEnemy)_obstacleEnemies.CreateRandomInstance(position,movementSpeedWhenWalkedOn);
+            foreach (var spawnRate in enemySpawnRateContainer.EnemySpawnRates)
+            {
+                if (spawnRate.Value.Min < random && random <= spawnRate.Value.Max)
+                {
+                    return spawnRate.Key;
+                }
+            }
+            return EnemyType.None;
         }
+    }
 
-        private double GenerateRandom()
+    public class EnemySpawner
+    {
+        private readonly List<KeyValuePair<Type, EnemyType>> _enemies = new List<KeyValuePair<Type, EnemyType>>
         {
-            Thread.Sleep(10);
-            Random random = new Random();
-            return random.NextDouble();
-        }
+            new KeyValuePair<Type, EnemyType>(Type.GetType("LevelGenerator.ConsoleApp.Enemy.Types.ObstacleEnemy"),EnemyType.Obstacle),
+            new KeyValuePair<Type, EnemyType>(Type.GetType( "LevelGenerator.ConsoleApp.Enemy.Types.RangerEnemy"),EnemyType.Ranger)
+        };
 
+        private readonly List<KeyValuePair<EnemyType, IRenderer>> _enemyVariants = new List<KeyValuePair<EnemyType, IRenderer>>
+        {
+            new KeyValuePair<EnemyType, IRenderer>(EnemyType.Obstacle, new TextBasedRenderer("P","Pattern")),
+            new KeyValuePair<EnemyType, IRenderer>(EnemyType.Obstacle, new TextBasedRenderer("T","Text"))
+        };
+
+        public IEnemy Spawn(EnemyType enemyType, params object[] ctorArgs)
+        {
+            var renderer = _enemyVariants.Where(x => x.Key == enemyType).ToList().GetRandom().Value;
+            var objects = ctorArgs.ToList();
+            objects.Add(renderer);
+            return (IEnemy)_enemies.Where(x => x.Value == enemyType).Select(x => x.Key).ToList().CreateRandomInstance(objects.ToArray());
+        }
+    }
+
+    public class EnemyVariantHolder
+    {
+        public IRenderer Renderer { get; set; }
+        public string Name { get; set; }
     }
 }

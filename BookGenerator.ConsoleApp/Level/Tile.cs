@@ -1,6 +1,6 @@
-﻿using LevelGenerator.ConsoleApp.Domain.Enemy;
+﻿using LevelGenerator.ConsoleApp.Enemy;
 
-namespace LevelGenerator.ConsoleApp.Domain.Level
+namespace LevelGenerator.ConsoleApp.Level
 {
     public class Tile
     {

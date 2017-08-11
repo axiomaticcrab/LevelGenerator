@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using LevelGenerator.ConsoleApp.Common;
-using LevelGenerator.ConsoleApp.Domain.Level;
+using LevelGenerator.ConsoleApp.Level;
 
 namespace LevelGenerator.ConsoleApp
 {
@@ -30,12 +30,12 @@ namespace LevelGenerator.ConsoleApp
 
         static void GenerateBook(int width, int height)
         {
-            Console.WriteLine(String.Format("********* Generating a World Width:{0} Height:{1}", width, height));
+            Console.WriteLine("********* Generating a World Width:{0} Height:{1}", width, height);
             var startDate = DateTime.Now;
             var worldGenerationResult = Generator.Init(width, height)
                 .Build();
             Log(worldGenerationResult);
-            Console.WriteLine(String.Format("********* Generated A World in {0}", DateTime.Now.Subtract(startDate)));
+            Console.WriteLine("********* Generated A World in {0}", DateTime.Now.Subtract(startDate));
         }
 
         static void Log(World world)

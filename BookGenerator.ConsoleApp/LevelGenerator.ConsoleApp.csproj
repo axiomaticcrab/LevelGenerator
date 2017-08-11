@@ -44,23 +44,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Enemy\Behaviours\ICanRotate.cs" />
-    <Compile Include="Domain\Enemy\Behaviours\ISlowPlayer.cs" />
-    <Compile Include="Domain\Enemy\Behaviours\Condition.cs" />
-    <Compile Include="Domain\Enemy\Behaviours\ICanMove.cs" />
-    <Compile Include="Domain\Enemy\IEnemy.cs" />
-    <Compile Include="Domain\Enemy\Types\PatternObstacleEnemy.cs" />
-    <Compile Include="Domain\Enemy\Types\TextObstacleEnemy.cs" />
-    <Compile Include="Domain\Level\Tile.cs" />
-    <Compile Include="Domain\Level\World.cs" />
-    <Compile Include="Domain\Enemy\Enemy.cs" />
+    <Compile Include="Enemy\Behaviours\ICanRotate.cs" />
+    <Compile Include="Enemy\Behaviours\ISlowPlayer.cs" />
+    <Compile Include="Enemy\Behaviours\Condition.cs" />
+    <Compile Include="Enemy\Behaviours\ICanMove.cs" />
+    <Compile Include="Enemy\IEnemy.cs" />
+    <Compile Include="Enemy\Types\ObstacleEnemy.cs" />
+    <Compile Include="Enemy\EnemyType.cs" />
+    <Compile Include="Enemy\Types\RangerEnemy.cs" />
+    <Compile Include="Level\Tile.cs" />
+    <Compile Include="Level\World.cs" />
+    <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Common\DoubleRange.cs" />
     <Compile Include="Generator\EnemySpawnRateContainer.cs" />
     <Compile Include="Generator\LevelGenerator.cs" />
     <Compile Include="Common\CommonEntensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\Level\Vector2.cs" />
+    <Compile Include="Level\Vector2.cs" />
     <Compile Include="Render\IRenderer.cs" />
     <Compile Include="Render\TextBasedRenderer.cs" />
   </ItemGroup>
