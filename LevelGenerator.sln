@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookGenerator.ConsoleApp", "BookGenerator.ConsoleApp\BookGenerator.ConsoleApp.csproj", "{70B1D89B-A3A6-4CA7-85E2-44A8C0DEEFEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelGenerator.ConsoleApp", "BookGenerator.ConsoleApp\LevelGenerator.ConsoleApp.csproj", "{70B1D89B-A3A6-4CA7-85E2-44A8C0DEEFEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
