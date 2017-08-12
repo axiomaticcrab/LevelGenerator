@@ -1,11 +1,11 @@
-﻿using LevelGenerator.ConsoleApp.Level;
+﻿using LevelGenerator.ConsoleApp.Common;
 using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Enemy
 {
     public interface IEnemy
     {
-        IRenderer Renderer { get; }
+        IEnemyRenderer EnemyRenderer { get; }
         string Name { get; }
         Vector2 Position { get; }
         EnemyType Type { get; }

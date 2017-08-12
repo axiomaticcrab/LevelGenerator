@@ -1,9 +1,16 @@
 ﻿namespace LevelGenerator.ConsoleApp.Render
 {
-    public interface IRenderer
+    public interface IEnemyRenderer
     {
         object Sprite { get; }
         string Name { get; }
         object Render();
+    }
+
+    public interface ILevelRenderer
+    {
+        Level.Level Level { get; }
+
+        void Render();
     }
 }

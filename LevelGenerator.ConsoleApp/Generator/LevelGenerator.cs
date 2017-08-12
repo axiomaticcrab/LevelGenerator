@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Collections.Generic;
 using LevelGenerator.ConsoleApp.Common;
 using LevelGenerator.ConsoleApp.Enemy;
 using LevelGenerator.ConsoleApp.Level;
@@ -26,7 +23,7 @@ namespace LevelGenerator.ConsoleApp.Generator
             return this;
         }
 
-        public World Build()
+        public Level.Level Build()
         {
             enemySpawnRateContainer = new EnemySpawnRateContainer().Init();
             var tileList = new List<Tile>();
@@ -55,7 +52,7 @@ namespace LevelGenerator.ConsoleApp.Generator
                     tileList.Add(tile);
                 }
             }
-            return new World(Width, Height, tileList);
+            return new Level.Level(Width, Height, tileList);
         }
 
         private EnemyType FindEnemyTypeToSpawn(double random)
@@ -71,32 +68,9 @@ namespace LevelGenerator.ConsoleApp.Generator
         }
     }
 
-    public class EnemySpawner
-    {
-        private readonly List<KeyValuePair<Type, EnemyType>> _enemies = new List<KeyValuePair<Type, EnemyType>>
-        {
-            new KeyValuePair<Type, EnemyType>(Type.GetType("LevelGenerator.ConsoleApp.Enemy.Types.ObstacleEnemy"),EnemyType.Obstacle),
-            new KeyValuePair<Type, EnemyType>(Type.GetType( "LevelGenerator.ConsoleApp.Enemy.Types.RangerEnemy"),EnemyType.Ranger)
-        };
-
-        private readonly List<KeyValuePair<EnemyType, IRenderer>> _enemyVariants = new List<KeyValuePair<EnemyType, IRenderer>>
-        {
-            new KeyValuePair<EnemyType, IRenderer>(EnemyType.Obstacle, new TextBasedRenderer("P","Pattern")),
-            new KeyValuePair<EnemyType, IRenderer>(EnemyType.Obstacle, new TextBasedRenderer("T","Text"))
-        };
-
-        public IEnemy Spawn(EnemyType enemyType, params object[] ctorArgs)
-        {
-            var renderer = _enemyVariants.Where(x => x.Key == enemyType).ToList().GetRandom().Value;
-            var objects = ctorArgs.ToList();
-            objects.Add(renderer);
-            return (IEnemy)_enemies.Where(x => x.Value == enemyType).Select(x => x.Key).ToList().CreateRandomInstance(objects.ToArray());
-        }
-    }
-
     public class EnemyVariantHolder
     {
-        public IRenderer Renderer { get; set; }
+        public IEnemyRenderer EnemyRenderer { get; set; }
         public string Name { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using LevelGenerator.ConsoleApp.Common;
-using LevelGenerator.ConsoleApp.Level;
+using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp
 {
@@ -12,35 +12,36 @@ namespace LevelGenerator.ConsoleApp
         {
             while (true)
             {
-                Console.WriteLine("Enter World Width Height");
+                Console.WriteLine("Enter Level Width And Height");
                 var widthAndHeight = Console.ReadLine();
                 if (string.IsNullOrEmpty(widthAndHeight))
                 {
-                    GenerateBook(30, 10);
+                    GenerateLevel(30, 10);
                 }
                 else
                 {
                     var list = widthAndHeight.Split(' ').ToList();
                     var worldWidth = list.First().ToInt();
                     var worldHeight = list.Last().ToInt();
-                    GenerateBook(worldWidth, worldHeight);
+                    GenerateLevel(worldWidth, worldHeight);
                 }
             }
         }
 
-        static void GenerateBook(int width, int height)
+        static void GenerateLevel(int width, int height)
         {
-            Console.WriteLine("********* Generating a World Width:{0} Height:{1}", width, height);
+            Console.WriteLine("********* Generating a Level Width:{0} Height:{1}", width, height);
             var startDate = DateTime.Now;
             var worldGenerationResult = Generator.Init(width, height)
                 .Build();
-            Log(worldGenerationResult);
-            Console.WriteLine("********* Generated A World in {0}", DateTime.Now.Subtract(startDate));
+            Render(worldGenerationResult);
+            Console.WriteLine("********* Generated a Level in {0}", DateTime.Now.Subtract(startDate));
         }
 
-        static void Log(World world)
+        static void Render(Level.Level level)
         {
-            Console.Write(world.ToString());
+            ILevelRenderer consoleRenderer = new ConsoleLevelRenderer(level);
+            consoleRenderer.Render();
         }
     }
 }

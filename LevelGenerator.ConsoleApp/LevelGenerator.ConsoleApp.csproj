@@ -53,8 +53,9 @@
     <Compile Include="Enemy\Types\ObstacleEnemy.cs" />
     <Compile Include="Enemy\EnemyType.cs" />
     <Compile Include="Enemy\Types\RangerEnemy.cs" />
+    <Compile Include="Generator\EnemySpawner.cs" />
     <Compile Include="Level\Tile.cs" />
-    <Compile Include="Level\World.cs" />
+    <Compile Include="Level\Level.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Common\DoubleRange.cs" />
     <Compile Include="Generator\EnemySpawnRateContainer.cs" />
@@ -62,12 +63,15 @@
     <Compile Include="Common\CommonEntensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Level\Vector2.cs" />
+    <Compile Include="Common\Vector2.cs" />
+    <Compile Include="Render\ConsoleLevelRenderer.cs" />
     <Compile Include="Render\IRenderer.cs" />
     <Compile Include="Render\TextBasedRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

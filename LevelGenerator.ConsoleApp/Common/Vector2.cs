@@ -1,4 +1,4 @@
-﻿namespace LevelGenerator.ConsoleApp.Level
+﻿namespace LevelGenerator.ConsoleApp.Common
 {
     public class Vector2
     {

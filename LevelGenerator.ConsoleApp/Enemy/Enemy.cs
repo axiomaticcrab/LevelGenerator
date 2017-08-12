@@ -1,4 +1,4 @@
-﻿using LevelGenerator.ConsoleApp.Level;
+﻿using LevelGenerator.ConsoleApp.Common;
 using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Enemy
@@ -6,21 +6,21 @@ namespace LevelGenerator.ConsoleApp.Enemy
     public abstract class Enemy : IEnemy
     {
         private readonly EnemyType _enemyType;
-        private readonly IRenderer _renderer;
+        private readonly IEnemyRenderer enemyRenderer;
         private readonly string _name;
         private readonly Vector2 _position;
 
-        protected Enemy(EnemyType enemyType, Vector2 position, IRenderer renderer)
+        protected Enemy(EnemyType enemyType, Vector2 position, IEnemyRenderer enemyRenderer)
         {
             _enemyType = enemyType;
-            _renderer = renderer;
-            _name = renderer.Name;
+            this.enemyRenderer = enemyRenderer;
+            _name = enemyRenderer.Name;
             _position = position;
         }
 
-        IRenderer IEnemy.Renderer
+        IEnemyRenderer IEnemy.EnemyRenderer
         {
-            get { return _renderer; }
+            get { return enemyRenderer; }
         }
         string IEnemy.Name
         {

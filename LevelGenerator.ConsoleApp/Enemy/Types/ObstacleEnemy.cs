@@ -1,5 +1,5 @@
-﻿using LevelGenerator.ConsoleApp.Enemy.Behaviours;
-using LevelGenerator.ConsoleApp.Level;
+﻿using LevelGenerator.ConsoleApp.Common;
+using LevelGenerator.ConsoleApp.Enemy.Behaviours;
 using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Enemy.Types
@@ -8,7 +8,7 @@ namespace LevelGenerator.ConsoleApp.Enemy.Types
     {
         private readonly double _movementSpeedWhenWalkedOn;
 
-        public ObstacleEnemy(Vector2 position, double movementSpeedWhenWalkedOn, IRenderer renderer) : base(EnemyType.Obstacle, position, renderer)
+        public ObstacleEnemy(Vector2 position, double movementSpeedWhenWalkedOn, IEnemyRenderer enemyRenderer) : base(EnemyType.Obstacle, position, enemyRenderer)
         {
             _movementSpeedWhenWalkedOn = movementSpeedWhenWalkedOn;
         }

@@ -1,29 +1,29 @@
 ﻿namespace LevelGenerator.ConsoleApp.Render
 {
-    public class TextBasedRenderer : IRenderer
+    public class TextBasedEnemyRenderer : IEnemyRenderer
     {
-        private readonly string _character;
-        private readonly string _name;
+        private readonly string character;
+        private readonly string name;
 
-        public TextBasedRenderer(string character, string name)
+        public TextBasedEnemyRenderer(string character, string name)
         {
-            _character = character;
-            _name = name;
+            this.character = character;
+            this.name = name;
         }
 
-        object IRenderer.Sprite
+        object IEnemyRenderer.Sprite
         {
-            get { return _character; }
+            get { return character; }
         }
 
-        string IRenderer.Name
+        string IEnemyRenderer.Name
         {
-            get { return _name; }
+            get { return name; }
         }
 
         public object Render()
         {
-            return _character;
+            return character;
         }
     }
 }
