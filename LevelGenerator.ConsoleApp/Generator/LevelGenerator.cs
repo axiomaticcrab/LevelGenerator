@@ -2,7 +2,6 @@
 using LevelGenerator.ConsoleApp.Common;
 using LevelGenerator.ConsoleApp.Enemy;
 using LevelGenerator.ConsoleApp.Level;
-using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Generator
 {
@@ -39,16 +38,21 @@ namespace LevelGenerator.ConsoleApp.Generator
                         Position = new Vector2(x, y)
                     };
 
-                    var random = CommonEntensions.GenerateRandom();
+                    var enemyTypeToSpawn = FindEnemyTypeToSpawn(CommonEntensions.GenerateRandom());
 
-                    var findEnemyTypeToSpawn = FindEnemyTypeToSpawn(random);
-
-                    switch (findEnemyTypeToSpawn)
+                    if (enemyTypeToSpawn!=EnemyType.None)
                     {
+                        switch (enemyTypeToSpawn)
+                        {
                             case EnemyType.Obstacle:
-                            tile.Enemy = enemySpawner.Spawn(findEnemyTypeToSpawn, new Vector2(x, y), 0.5f);
-                            break;
+                                tile.Enemy = enemySpawner.Spawn(enemyTypeToSpawn, new Vector2(x, y), 0.5f);
+                                break;
+                            default:
+                                tile.Enemy = enemySpawner.Spawn(enemyTypeToSpawn, new Vector2(x, y));
+                                break;
+                        }    
                     }
+                    
                     tileList.Add(tile);
                 }
             }
@@ -66,11 +70,5 @@ namespace LevelGenerator.ConsoleApp.Generator
             }
             return EnemyType.None;
         }
-    }
-
-    public class EnemyVariantHolder
-    {
-        public IEnemyRenderer EnemyRenderer { get; set; }
-        public string Name { get; set; }
     }
 }

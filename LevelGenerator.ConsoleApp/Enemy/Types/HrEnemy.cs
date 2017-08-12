@@ -3,9 +3,10 @@ using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Enemy.Types
 {
-    public class RangerEnemy : Enemy
+    public class HrEnemy : Enemy
     {
-        public RangerEnemy(Vector2 position, IEnemyRenderer enemyRenderer) : base(EnemyType.Ranger, position, enemyRenderer)
+        public HrEnemy(Vector2 position, IEnemyRenderer enemyRenderer)
+            : base(EnemyType.Hr, position, enemyRenderer)
         {
         }
     }

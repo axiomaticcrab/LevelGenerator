@@ -18,7 +18,7 @@ namespace LevelGenerator.ConsoleApp.Common
 
         public static T GetRandom<T>(this List<T> list)
         {
-            Thread.Sleep(50);
+            Thread.Sleep(10);
             return list[new Random().Next(0, list.Count)];
         }
 

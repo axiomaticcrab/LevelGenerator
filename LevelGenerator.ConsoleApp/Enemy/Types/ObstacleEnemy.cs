@@ -6,17 +6,17 @@ namespace LevelGenerator.ConsoleApp.Enemy.Types
 {
     public class ObstacleEnemy : Enemy, ISlowPlayer
     {
-        private readonly double _movementSpeedWhenWalkedOn;
+        private readonly double movementSpeedWhenWalkedOn;
 
         public ObstacleEnemy(Vector2 position, double movementSpeedWhenWalkedOn, IEnemyRenderer enemyRenderer) : base(EnemyType.Obstacle, position, enemyRenderer)
         {
-            _movementSpeedWhenWalkedOn = movementSpeedWhenWalkedOn;
+            this.movementSpeedWhenWalkedOn = movementSpeedWhenWalkedOn;
         }
 
 
         double ISlowPlayer.MovementSpeedWhenWalkedOn
         {
-            get { return _movementSpeedWhenWalkedOn; }
+            get { return movementSpeedWhenWalkedOn; }
         }
     }
 }

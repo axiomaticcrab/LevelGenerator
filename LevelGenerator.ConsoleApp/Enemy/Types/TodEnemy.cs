@@ -3,9 +3,9 @@ using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Enemy.Types
 {
-    public class RangerEnemy : Enemy
+    public class TodEnemy : Enemy
     {
-        public RangerEnemy(Vector2 position, IEnemyRenderer enemyRenderer) : base(EnemyType.Ranger, position, enemyRenderer)
+        public TodEnemy(Vector2 position, IEnemyRenderer enemyRenderer) : base(EnemyType.Tod, position, enemyRenderer)
         {
         }
     }

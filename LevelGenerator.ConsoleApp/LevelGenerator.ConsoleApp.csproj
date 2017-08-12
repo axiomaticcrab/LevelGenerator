@@ -50,10 +50,16 @@
     <Compile Include="Enemy\Behaviours\Condition.cs" />
     <Compile Include="Enemy\Behaviours\ICanMove.cs" />
     <Compile Include="Enemy\IEnemy.cs" />
+    <Compile Include="Enemy\Types\AoeEnemy.cs" />
+    <Compile Include="Enemy\Types\CfEnemy.cs" />
+    <Compile Include="Enemy\Types\DpsEnemy.cs" />
+    <Compile Include="Enemy\Types\HrEnemy.cs" />
     <Compile Include="Enemy\Types\ObstacleEnemy.cs" />
     <Compile Include="Enemy\EnemyType.cs" />
     <Compile Include="Enemy\Types\RangerEnemy.cs" />
+    <Compile Include="Enemy\Types\TodEnemy.cs" />
     <Compile Include="Generator\EnemySpawner.cs" />
+    <Compile Include="Generator\EnemyVariantHolder.cs" />
     <Compile Include="Level\Tile.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Enemy\Enemy.cs" />
