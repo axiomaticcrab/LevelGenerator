@@ -1,6 +1,6 @@
 ﻿using LevelGenerator.ConsoleApp.Common;
 using LevelGenerator.ConsoleApp.Enemy.Behaviours;
-using LevelGenerator.ConsoleApp.Render;
+using LevelGenerator.ConsoleApp.Render.Enemy;
 
 namespace LevelGenerator.ConsoleApp.Enemy.Types
 {

@@ -1,4 +1,4 @@
-﻿namespace LevelGenerator.ConsoleApp.Render
+﻿namespace LevelGenerator.ConsoleApp.Render.Enemy
 {
     public class TextBasedEnemyRenderer : IEnemyRenderer
     {
@@ -11,7 +11,7 @@
             this.name = name;
         }
 
-        object IEnemyRenderer.Sprite
+        object IRenderer.Sprite
         {
             get { return character; }
         }

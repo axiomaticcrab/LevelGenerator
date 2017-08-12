@@ -1,6 +1,6 @@
-﻿using LevelGenerator.ConsoleApp.Render;
+﻿using LevelGenerator.ConsoleApp.Render.Enemy;
 
-namespace LevelGenerator.ConsoleApp.Generator
+namespace LevelGenerator.ConsoleApp.Common
 {
     public class EnemyVariantHolder
     {

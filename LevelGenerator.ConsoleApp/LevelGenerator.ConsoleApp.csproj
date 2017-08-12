@@ -58,26 +58,50 @@
     <Compile Include="Enemy\EnemyType.cs" />
     <Compile Include="Enemy\Types\RangerEnemy.cs" />
     <Compile Include="Enemy\Types\TodEnemy.cs" />
-    <Compile Include="Generator\EnemySpawner.cs" />
-    <Compile Include="Generator\EnemyVariantHolder.cs" />
+    <Compile Include="Generator\Spawner\EnemySpawner.cs" />
+    <Compile Include="Generator\Spawner\TextBasedEnemySpawner.cs" />
+    <Compile Include="Generator\Spawner\HtmlBasedEnemySpawner.cs" />
+    <Compile Include="Generator\Spawner\IEnemySpawner.cs" />
+    <Compile Include="Common\EnemyVariantHolder.cs" />
     <Compile Include="Level\Tile.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="Common\DoubleRange.cs" />
-    <Compile Include="Generator\EnemySpawnRateContainer.cs" />
+    <Compile Include="Common\EnemySpawnRateContainer.cs" />
     <Compile Include="Generator\LevelGenerator.cs" />
     <Compile Include="Common\CommonEntensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\Vector2.cs" />
-    <Compile Include="Render\ConsoleLevelRenderer.cs" />
+    <Compile Include="Render\Enemy\HtmlBasedEnemyRenderer.cs" />
+    <Compile Include="Render\Level\ConsoleLevelRenderer.cs" />
+    <Compile Include="Render\Level\HtmlLevelRenderer.cs" />
+    <Compile Include="Render\Level\ILevelRenderer.cs" />
+    <Compile Include="Render\Enemy\IEnemyRenderer.cs" />
     <Compile Include="Render\IRenderer.cs" />
-    <Compile Include="Render\TextBasedRenderer.cs" />
+    <Compile Include="Render\Enemy\TextBasedRenderer.cs" />
+    <Compile Include="Render\Tile\HtmlBasedTileRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Sprites\Enemy\Cf\woodpecker.jpg" />
+    <Content Include="Resources\Sprites\Enemy\Ranger\function.png" />
+    <Content Include="Resources\Sprites\Enemy\Ranger\integral.png" />
+    <Content Include="Resources\Sprites\Enemy\Obstacle\pattern.png" />
+    <Content Include="Resources\Sprites\Enemy\Dps\odd guy.png" />
+    <Content Include="Resources\Sprites\Enemy\Tod\scribble.png" />
+    <Content Include="Resources\Sprites\Enemy\Aoe\bored face idle.png" />
+    <Content Include="Resources\Sprites\Enemy\Hr\flag idle.png" />
+    <Content Include="Resources\Sprites\Enemy\Obstacle\text.png" />
+    <Content Include="Resources\Sprites\Tile\tile.png" />
+    <Content Include="Resources\Template\level.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Generated\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

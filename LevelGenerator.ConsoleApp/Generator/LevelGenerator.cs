@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using LevelGenerator.ConsoleApp.Common;
+﻿using LevelGenerator.ConsoleApp.Common;
 using LevelGenerator.ConsoleApp.Enemy;
+using LevelGenerator.ConsoleApp.Generator.Spawner;
 using LevelGenerator.ConsoleApp.Level;
+using LevelGenerator.ConsoleApp.Render;
 
 namespace LevelGenerator.ConsoleApp.Generator
 {
@@ -9,23 +10,22 @@ namespace LevelGenerator.ConsoleApp.Generator
     {
         private int Width { get; set; }
         private int Height { get; set; }
+        private IRenderer TileRenderer { get; set; }
 
-        private EnemySpawner enemySpawner;
-        private EnemySpawnRateContainer enemySpawnRateContainer;
+        private IEnemySpawner enemySpawner;
 
-
-        public LevelGenerator Init(int width, int height)
+        public LevelGenerator Init(int width, int height, IRenderer tileRenderer, IEnemySpawner enemySpawner)
         {
-            enemySpawner = new EnemySpawner();
+            this.enemySpawner = enemySpawner;
             Width = width;
             Height = height;
+            TileRenderer = tileRenderer;
             return this;
         }
 
         public Level.Level Build()
         {
-            enemySpawnRateContainer = new EnemySpawnRateContainer().Init();
-            var tileList = new List<Tile>();
+            Level.Level result = new Level.Level(Width, Height, new EnemySpawnRateContainer().Init());
             var width = Width / 2;
             var height = Height / 2;
 
@@ -33,35 +33,29 @@ namespace LevelGenerator.ConsoleApp.Generator
             {
                 for (int y = (height * -1); y < height; y++)
                 {
-                    var tile = new Tile
-                    {
-                        Position = new Vector2(x, y)
-                    };
+                    var enemyTypeToSpawn = FindEnemyTypeToSpawn(result);
 
-                    var enemyTypeToSpawn = FindEnemyTypeToSpawn(CommonEntensions.GenerateRandom());
-
-                    if (enemyTypeToSpawn!=EnemyType.None)
+                    switch (enemyTypeToSpawn)
                     {
-                        switch (enemyTypeToSpawn)
-                        {
-                            case EnemyType.Obstacle:
-                                tile.Enemy = enemySpawner.Spawn(enemyTypeToSpawn, new Vector2(x, y), 0.5f);
-                                break;
-                            default:
-                                tile.Enemy = enemySpawner.Spawn(enemyTypeToSpawn, new Vector2(x, y));
-                                break;
-                        }    
+                        case EnemyType.None:
+                            result.Tiles.Add(new Tile(new Vector2(x, y), null, TileRenderer));
+                            break;
+                        case EnemyType.Obstacle:
+                            result.Tiles.Add(new Tile(new Vector2(x, y), enemySpawner.Spawn(enemyTypeToSpawn, new Vector2(x, y), 0.5f), TileRenderer));
+                            break;
+                        default:
+                            result.Tiles.Add(new Tile(new Vector2(x, y), enemySpawner.Spawn(enemyTypeToSpawn, new Vector2(x, y)), TileRenderer));
+                            break;
                     }
-                    
-                    tileList.Add(tile);
                 }
             }
-            return new Level.Level(Width, Height, tileList);
+            return result;
         }
 
-        private EnemyType FindEnemyTypeToSpawn(double random)
+        private EnemyType FindEnemyTypeToSpawn(Level.Level level)
         {
-            foreach (var spawnRate in enemySpawnRateContainer.EnemySpawnRates)
+            var random = CommonEntensions.GenerateRandom();
+            foreach (var spawnRate in level.EnemySpawnRateContainer.EnemySpawnRates)
             {
                 if (spawnRate.Value.Min < random && random <= spawnRate.Value.Max)
                 {

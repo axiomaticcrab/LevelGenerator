@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Configuration;
-using LevelGenerator.ConsoleApp.Common;
 using LevelGenerator.ConsoleApp.Enemy;
 
-namespace LevelGenerator.ConsoleApp.Generator
+namespace LevelGenerator.ConsoleApp.Common
 {
     public class EnemySpawnRateContainer
     {
@@ -31,17 +29,14 @@ namespace LevelGenerator.ConsoleApp.Generator
 
             foreach (var enemySpawnRateKey in enemySpawnRateKeys)
             {
-                var min = GetKeyValueFromAppSettings(enemySpawnRateKey.Value + "Min");
-                var max = GetKeyValueFromAppSettings(enemySpawnRateKey.Value + "Max");
+                var min = CommonEntensions.GetKeyValueFromAppSettings<double>(enemySpawnRateKey.Value + "Min");
+                var max = CommonEntensions.GetKeyValueFromAppSettings<double>(enemySpawnRateKey.Value + "Max");
 
                 EnemySpawnRates.Add(new KeyValuePair<EnemyType, DoubleRange>(enemySpawnRateKey.Key, new DoubleRange(min, max)));
             }
             return this;
         }
 
-        protected double GetKeyValueFromAppSettings(string key)
-        {
-            return ConfigurationManager.AppSettings[key].ToDouble();
-        }
+        
     }
 }

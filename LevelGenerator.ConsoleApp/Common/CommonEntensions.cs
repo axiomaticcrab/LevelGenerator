@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Threading;
 
 namespace LevelGenerator.ConsoleApp.Common
 {
     public static class CommonEntensions
     {
+        public static int RandomGenerationSleepMilisecon = 10;
+
         public static int ToInt(this string s)
         {
             return Convert.ToInt32(s);
@@ -18,8 +22,7 @@ namespace LevelGenerator.ConsoleApp.Common
 
         public static T GetRandom<T>(this List<T> list)
         {
-            Thread.Sleep(10);
-            return list[new Random().Next(0, list.Count)];
+            return list[GenerateRandom(list.Count)];
         }
 
         public static object CreateRandomInstance(this List<Type> typeList, object[] args)
@@ -29,9 +32,39 @@ namespace LevelGenerator.ConsoleApp.Common
 
         public static double GenerateRandom()
         {
-            Thread.Sleep(10);
+            Thread.Sleep(RandomGenerationSleepMilisecon);
             Random random = new Random();
             return random.NextDouble();
+        }
+
+        public static int GenerateRandom(int max)
+        {
+            Thread.Sleep(RandomGenerationSleepMilisecon);
+            Random random = new Random();
+            return random.Next(max);
+        }
+
+
+        public static string SaveGeneratedHtmlFile(string fileName, string content)
+        {
+            var pathToSave = GetKeyValueFromAppSettings<string>("GeneratedFilesSavePath");
+            var filePath = CreateFile(pathToSave, fileName);
+            File.WriteAllText(filePath, content);
+            return filePath;
+        }
+
+        public static string CreateFile(string path, string fileName)
+        {
+            var pathToSave = string.Format("{0}\\{1}", path, fileName);
+            var stream = File.Create(pathToSave);
+            stream.Flush();
+            stream.Close();
+            return pathToSave;
+        }
+
+        public static T GetKeyValueFromAppSettings<T>(string key)
+        {
+            return (T)Convert.ChangeType(ConfigurationManager.AppSettings[key], typeof(T));
         }
     }
 }

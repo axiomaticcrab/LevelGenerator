@@ -1,5 +1,5 @@
 ﻿using LevelGenerator.ConsoleApp.Common;
-using LevelGenerator.ConsoleApp.Render;
+using LevelGenerator.ConsoleApp.Render.Enemy;
 
 namespace LevelGenerator.ConsoleApp.Enemy.Types
 {

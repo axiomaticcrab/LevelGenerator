@@ -2,26 +2,27 @@
 using System.Linq;
 using System.Text;
 
-namespace LevelGenerator.ConsoleApp.Render
+namespace LevelGenerator.ConsoleApp.Render.Level
 {
     public class ConsoleLevelRenderer : ILevelRenderer
     {
-        private readonly Level.Level level;
+        private ConsoleApp.Level.Level level;
 
-        public ConsoleLevelRenderer(Level.Level level)
-        {
-            this.level = level;
-        }
-
-        Level.Level ILevelRenderer.Level
+        ConsoleApp.Level.Level ILevelRenderer.Level
         {
             get { return level; }
         }
 
-        public void Render()
+        public ILevelRenderer Init(ConsoleApp.Level.Level level)
+        {
+            this.level = level;
+            return this;
+        }
+
+        public object Render()
         {
             StringBuilder builder = new StringBuilder();
-            var rows = level.tiles.GroupBy(x => x.Position.Y).ToList();
+            var rows = level.Tiles.GroupBy(x => x.Position.Y).ToList();
 
             foreach (var row in rows)
             {
@@ -40,6 +41,7 @@ namespace LevelGenerator.ConsoleApp.Render
             }
 
             Console.Write(builder.ToString());
+            return null;
         }
     }
 }
