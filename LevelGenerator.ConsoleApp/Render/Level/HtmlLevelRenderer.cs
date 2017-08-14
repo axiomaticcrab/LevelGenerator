@@ -22,7 +22,18 @@ namespace LevelGenerator.ConsoleApp.Render.Level
 
         public object Render()
         {
-            var template = File.ReadAllText(CommonEntensions.GetKeyValueFromAppSettings<string>("LevelHtmlFileTemplatePath"));
+            var tempFilePath = string.Empty;
+            switch (Environment.MachineName)
+            {
+                case "DESKTOP-9OSBTS0":
+                    tempFilePath = CommonEntensions.GetKeyValueFromAppSettings<string>("LevelHtmlFileTemplatePath2");
+                    break;
+                default:
+                    tempFilePath = CommonEntensions.GetKeyValueFromAppSettings<string>("LevelHtmlFileTemplatePath");
+                    break;
+            }
+
+            var template = File.ReadAllText(tempFilePath);
             StringBuilder builder = new StringBuilder();
             var rows = level.Tiles.GroupBy(x => x.Position.Y).ToList();
 

@@ -47,7 +47,17 @@ namespace LevelGenerator.ConsoleApp.Common
 
         public static string SaveGeneratedHtmlFile(string fileName, string content)
         {
-            var pathToSave = GetKeyValueFromAppSettings<string>("GeneratedFilesSavePath");
+            var pathToSave = string.Empty;
+            switch (Environment.MachineName)
+            {
+                case "DESKTOP-9OSBTS0":
+                    pathToSave = GetKeyValueFromAppSettings<string>("GeneratedFilesSavePath2");
+                    break;
+                default:
+                    pathToSave = GetKeyValueFromAppSettings<string>("GeneratedFilesSavePath");
+                    break;
+            }
+
             var filePath = CreateFile(pathToSave, fileName);
             File.WriteAllText(filePath, content);
             return filePath;
